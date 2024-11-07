@@ -45,7 +45,7 @@ Convert eBooks to audiobooks with chapters and metadata using Calibre and Coqui 
 
 ### 🔧 Installation Instructions
 
-1. **Install Python 3.x** from [Python.org](https://www.python.org/downloads/).
+1. **Install Python 3.7 < version < 3.13** from [Python.org](https://www.python.org/downloads/).
 
 2. **Install Calibre**:
    - **Ubuntu**: `sudo apt-get install -y calibre`
@@ -62,15 +62,12 @@ Convert eBooks to audiobooks with chapters and metadata using Calibre and Coqui 
    - **macOS**: `brew install mecab`, `brew install mecab-ipadic`
    - **Windows**: [mecab-website-to-install-manually](https://taku910.github.io/mecab/#download) (Note: Japanese support is limited)
 
-5. **Install Python packages**:
+5. **Pip install ebook2audiobook**:
    ```bash
-   pip install coqui-tts==0.24.2 pydub nltk beautifulsoup4 ebooklib tqdm gradio==4.44.0
-   
-   python -m nltk.downloader punkt
-   python -m nltk.downloader punkt_tab
+   pip install ebook2audiobook
    ```
 
-   **For non-Latin languages**:
+   **For non-Latin languages (Japanese Support)**:
    ```bash
    pip install mecab mecab-python3 unidic
    
@@ -101,30 +98,30 @@ Specify the language code when running the script in headless mode.
 
 ### 🖥️ Launching Gradio Web Interface
 
-1. **Run the Script**:
+1. **Run the command**:
    ```bash
-   python app.py
+   ebook2audiobook
    ```
 
 2. **Open the Web App**: Click the URL provided in the terminal to access the web app and convert eBooks.
-3. **For Public Link**: Add `--share True` to the end of it like this: `python app.py --share True`
-- **[For More Parameters]**: use the `-h` parameter like this `python app.py -h`
+3. **For Public Link**: Add `--share True` to the end of it like this: `ebook2audiobook --share True`
+- **[For More Parameters]**: use the `-h` parameter like this `ebook2audiobook -h`
 
 ### 📝 Basic Headless Usage
 
 ```bash
-python app.py --headless True --ebook <path_to_ebook_file> --voice [path_to_voice_file] --language [language_code]
+ebook2audiobook --headless True --ebook <path_to_ebook_file> --voice [path_to_voice_file] --language [language_code]
 ```
 
 - **<path_to_ebook_file>**: Path to your eBook file.
 - **[path_to_voice_file]**: Optional for voice cloning.
 - **[language_code]**: Optional to specify language.
-- **[For More Parameters]**: use the `-h` parameter like this `python app.py -h`
+- **[For More Parameters]**: use the `-h` parameter like this `ebook2audiobook -h`
 
 ### 🧩 Headless Custom XTTS Model Usage
 
 ```bash
-python app.py --headless True --use_custom_model True --ebook <ebook_file_path> --voice <target_voice_file_path> --language <language> --custom_model <custom_model_path> --custom_config <custom_config_path> --custom_vocab <custom_vocab_path>
+ebook2audiobook --headless True --use_custom_model True --ebook <ebook_file_path> --voice <target_voice_file_path> --language <language> --custom_model <custom_model_path> --custom_config <custom_config_path> --custom_vocab <custom_vocab_path>
 ```
 
 - **<ebook_file_path>**: Path to your eBook file.
@@ -133,13 +130,13 @@ python app.py --headless True --use_custom_model True --ebook <ebook_file_path> 
 - **<custom_model_path>**: Path to `model.pth`.
 - **<custom_config_path>**: Path to `config.json`.
 - **<custom_vocab_path>**: Path to `vocab.json`.
-- **[For More Parameters]**: use the `-h` parameter like this `python app.py -h`
+- **[For More Parameters]**: use the `-h` parameter like this `ebook2audiobook -h`
 
 
 ### 🧩 Headless Custom XTTS Model Usage With Zip link to XTTS Fine-Tune Model 🌐
 
 ```bash
-python app.py --headless True --use_custom_model True --ebook <ebook_file_path> --voice <target_voice_file_path> --language <language> --custom_model_url <custom_model_URL_ZIP_path>
+ebook2audiobook --headless True --use_custom_model True --ebook <ebook_file_path> --voice <target_voice_file_path> --language <language> --custom_model_url <custom_model_URL_ZIP_path>
 ```
 
 - **<ebook_file_path>**: Path to your eBook file.
@@ -148,11 +145,11 @@ python app.py --headless True --use_custom_model True --ebook <ebook_file_path> 
 - **<custom_model_URL_ZIP_path>**: URL Path to zip of Model folder. For Example this for the [xtts_David_Attenborough_fine_tune](https://huggingface.co/drewThomasson/xtts_David_Attenborough_fine_tune/tree/main) `https://huggingface.co/drewThomasson/xtts_David_Attenborough_fine_tune/resolve/main/Finished_model_files.zip?download=true`
 - For a custom model a ref audio clip of the voice will also be needed:
 [ref audio clip of David Attenborough](https://huggingface.co/drewThomasson/xtts_David_Attenborough_fine_tune/blob/main/ref.wav)
-- **[For More Parameters]**: use the `-h` parameter like this `python app.py -h`
+- **[For More Parameters]**: use the `-h` parameter like this `ebook2audiobook -h`
 
 ### 🔍 For Detailed Guide with list of all Parameters to use
 ```bash
-python app.py -h
+ebook2audiobook -h
 ```
 - This will output the following:
 ```bash
