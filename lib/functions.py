@@ -865,7 +865,7 @@ def convert_ebook(args):
                         language_array = languages.get(part3=language)
                         if language_array and language_array.part1:
                             language_iso1 = language_array.part1
-                        if ebook["metadata"]["language"] == language or ebook["metadata"]["language"] == language_iso1:
+                        if os.path.splitext(ebook["src"])[1].lower() == '.txt' or ebook["metadata"]["language"] == language or ebook["metadata"]["language"] == language_iso1:
                             ebook["metadata"]["creator"] = ", ".join(creator[0] for creator in ebook["metadata"]["creator"])
                             ebook["cover"] = get_cover()
                             if get_chapters(language):
