@@ -450,5 +450,15 @@ https://github.com/user-attachments/assets/47c846a7-9e51-4eb9-844a-7460402a20a8
 - **Calibre**: [Calibre Website](https://calibre-ebook.com)
 - **FFmpeg**: [FFmpeg Website](https://ffmpeg.org)
 
-- [@shakenbake15 for better chapter saving method](https://github.com/DrewThomasson/ebook2audiobook/issues/8) 
+- [@shakenbake15 for better chapter saving method](https://github.com/DrewThomasson/ebook2audiobook/issues/8)
 
+  ## Star History
+  ## Star History
+
+<a href="https://star-history.com/#DrewThomasson/ebook2audiobook&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DrewThomasson/ebook2audiobook&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DrewThomasson/ebook2audiobook&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DrewThomasson/ebook2audiobook&type=Date" />
+ </picture>
+</a>
