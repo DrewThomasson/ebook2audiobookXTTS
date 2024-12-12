@@ -60,10 +60,17 @@ ebook_formats = ['.epub', '.mobi', '.azw3', 'fb2', 'lrf', 'rb', 'snb', 'tcr', '.
 audiobook_format = 'm4b' # or 'mp3'
 audio_proc_format = 'wav' # only 'wav' is valid for now
 
-xtts_fine_tuned_voice_actors = {
+fine_tuned_voice_actor_models = {
     "David Attenborough": {
         "zip_file": "https://huggingface.co/drewThomasson/xtts_David_Attenborough_fine_tune/resolve/main/Finished_model_files.zip?download=true",
-        "ref_audio": "https://huggingface.co/drewThomasson/xtts_David_Attenborough_fine_tune/resolve/main/ref.wav?download=true"
+        "ref_audio_link": "https://huggingface.co/drewThomasson/xtts_David_Attenborough_fine_tune/resolve/main/ref.wav?download=true",
+        "huggingface_repo": "drewThomasson/xtts_David_Attenborough_fine_tune",
+        "model_files_folder": "Finished_model_files",
+        "reference_audio": "Finished_model_files/ref.wav",
+        "tts_model": "XTTSV2",
+        "language": "english",
+        "picture_of_character": ""
+        
     },
     "HeadSpace Dude (Without rain)": {
         "zip_file": "https://huggingface.co/drewThomasson/Headspace_dude/resolve/main/Finished_model_files.zip?download=true",
