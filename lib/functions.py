@@ -40,6 +40,43 @@ from urllib.parse import urlparse
 import lib.conf as conf
 import lib.lang as lang
 
+def download_fine_tuned_model(model_key):
+    """Download the fine-tuned model files from Hugging Face if missing."""
+    model = models['xtts'].get(model_key)
+    if not model:
+        raise ValueError(f"Fine-tuned model '{model_key}' not found in configuration.")
+
+    # Construct the actual download location based on folder and api
+    model_dir = os.path.join(models_dir, 'tts', model['folder'].strip('/'), model['api'].strip('/'))
+    os.makedirs(model_dir, exist_ok=True)
+
+    for file_name in model['files']:
+        file_path = os.path.join(model_dir, file_name)
+        if not os.path.exists(file_path):
+            print(f"Downloading {file_name} for model '{model_key}'...")
+            # Construct the download URL
+            url = f"https://huggingface.co/{model['api']}/resolve/main/{model.get('subfolder', '')}/{file_name}".strip('/')
+            try:
+                response = requests.get(url, stream=True)
+                response.raise_for_status()
+                total_size = int(response.headers.get('content-length', 0))
+                with open(file_path, 'wb') as file, tqdm(
+                    total=total_size, unit='B', unit_scale=True, desc=f"Downloading {file_name}"
+                ) as progress:
+                    for chunk in response.iter_content(chunk_size=1024):
+                        file.write(chunk)
+                        progress.update(len(chunk))
+                print(f"Downloaded: {file_name}")
+            except Exception as e:
+                raise RuntimeError(f"Failed to download {file_name}: {e}")
+
+    print(f"All files for model '{model_key}' are ready at {model_dir}.")
+
+
+
+
+
+
 def inject_configs(target_namespace):
     # Extract variables from both modules and inject them into the target namespace
     for module in (conf, lang):
@@ -901,6 +938,10 @@ def convert_ebook(args):
             custom_model_file = args['custom_model']
             custom_model_url = args['custom_model_url'] if custom_model_file is None else None
             fine_tuned = args['fine_tuned'] if check_fine_tuned(args['fine_tuned'], args['language']) else False
+
+            if fine_tuned and fine_tuned in models['xtts']:
+                print(f"Ensuring fine-tuned model '{fine_tuned}' is ready...")
+                download_fine_tuned_model(fine_tuned)
             
             if not fine_tuned:
                 raise ValueError('The fine tuned model does not exist.')

@@ -19,3 +19,4 @@ transformers
 translate
 tqdm
 unidic
+huggingface_hub
