@@ -46,14 +46,19 @@ def download_fine_tuned_model(model_key):
     if not model:
         raise ValueError(f"Fine-tuned model '{model_key}' not found in configuration.")
 
-    # Construct the actual download location based on folder and api
-    model_dir = os.path.join(models_dir, 'tts', model['folder'].strip('/'), model['api'].strip('/'))
+    # Check if the model is fine-tuned (skip std models)
+    if model_key == "std":
+        print("Standard model detected. Skipping fine-tuned download process.")
+        return
+
+    # Construct the full directory path for the fine-tuned model
+    model_dir = os.path.join(models_dir, 'tts', model['folder'], model['api'])
     os.makedirs(model_dir, exist_ok=True)
 
     for file_name in model['files']:
         file_path = os.path.join(model_dir, file_name)
         if not os.path.exists(file_path):
-            print(f"Downloading {file_name} for model '{model_key}'...")
+            print(f"Downloading {file_name} for fine-tuned model '{model_key}'...")
             # Construct the download URL
             url = f"https://huggingface.co/{model['api']}/resolve/main/{model.get('subfolder', '')}/{file_name}".strip('/')
             try:
@@ -70,7 +75,8 @@ def download_fine_tuned_model(model_key):
             except Exception as e:
                 raise RuntimeError(f"Failed to download {file_name}: {e}")
 
-    print(f"All files for model '{model_key}' are ready at {model_dir}.")
+    print(f"All files for fine-tuned model '{model_key}' are ready at {model_dir}.")
+
 
 
 
