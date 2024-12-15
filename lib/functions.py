@@ -945,7 +945,7 @@ def convert_ebook(args):
             custom_model_url = args['custom_model_url'] if custom_model_file is None else None
             fine_tuned = args['fine_tuned'] if check_fine_tuned(args['fine_tuned'], args['language']) else False
 
-            if fine_tuned and fine_tuned in models['xtts']:
+            if fine_tuned:
                 print(f"Ensuring fine-tuned model '{fine_tuned}' is ready...")
                 download_fine_tuned_model(fine_tuned)
             
